@@ -31,11 +31,13 @@ public class SecurityConfig {
 
 		// AUTHENTICATION IS REQUIRED FOR ACCESSING THE APP
 		
-		return http.authorizeRequests(configurer -> configurer.anyRequest().authenticated())
+		return http.authorizeRequests(configurer -> configurer
+                .antMatchers("/resources/**").permitAll()
+				.anyRequest().authenticated())
 
 				// OVERRIDES THE DEFAULT SPRING LOGIN PAGE
 				.formLogin(configurer -> configurer.loginPage("/login")
-						.loginProcessingUrl("/authenticateTheUser").permitAll())
+						.loginProcessingUrl("/authenticate").permitAll())
 
 				.build();
 	}
