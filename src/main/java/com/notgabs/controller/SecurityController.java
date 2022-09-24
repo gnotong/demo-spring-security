@@ -9,4 +9,10 @@ public class SecurityController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/authenticate")
+	public String process() {
+		// TODO: manage user access here
+		return "redirect:/";
+	}
 }

@@ -26,17 +26,17 @@ public class SecurityConfig {
 		return new InMemoryUserDetailsManager(users);
 	}
 
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//
-//		// AUTHENTICATION IS REQUIRED FOR ACCESSING THE APP
-//		
-//		return http.authorizeRequests(configurer -> configurer.anyRequest().authenticated())
-//
-//				// OVERRIDES THE DEFAULT SPRING LOGIN PAGE
-//				.formLogin(configurer -> configurer.loginPage("/login")
-//						.loginProcessingUrl("/authenticateTheUser").permitAll())
-//
-//				.build();
-//	}
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		// AUTHENTICATION IS REQUIRED FOR ACCESSING THE APP
+		
+		return http.authorizeRequests(configurer -> configurer.anyRequest().authenticated())
+
+				// OVERRIDES THE DEFAULT SPRING LOGIN PAGE
+				.formLogin(configurer -> configurer.loginPage("/login")
+						.loginProcessingUrl("/authenticateTheUser").permitAll())
+
+				.build();
+	}
 }
