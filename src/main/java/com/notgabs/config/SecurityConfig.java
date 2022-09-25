@@ -43,8 +43,8 @@ public class SecurityConfig {
 					.loginPage("/login")
 					.loginProcessingUrl("/authenticate").permitAll()
 				)
-				.logout(LogoutConfigurer::permitAll
-				)
+				.logout(LogoutConfigurer::permitAll)
+				.exceptionHandling().accessDeniedPage("/error").and()
 				.build();
 	}
 }
