@@ -1,3 +1,6 @@
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -61,6 +64,10 @@
 	<div class="container">
 		<div class="row">
 			<h1 class="text-danger">Hello mec</h1>
+			
+			<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+				<button type="submit" class="btn btn-dark" value="logout">Logout</button>
+			</form:form>
 		</div>
 	</div>
 

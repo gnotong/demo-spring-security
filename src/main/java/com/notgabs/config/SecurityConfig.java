@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -32,13 +33,16 @@ public class SecurityConfig {
 		// AUTHENTICATION IS REQUIRED FOR ACCESSING THE APP
 		
 		return http.authorizeRequests(configurer -> configurer
-                .antMatchers("/resources/**").permitAll()
-				.anyRequest().authenticated())
-
+	                .antMatchers("/resources/**").permitAll()
+					.anyRequest().authenticated()
+				)
 				// OVERRIDES THE DEFAULT SPRING LOGIN PAGE
-				.formLogin(configurer -> configurer.loginPage("/login")
-						.loginProcessingUrl("/authenticate").permitAll())
-
+				.formLogin(configurer -> configurer
+					.loginPage("/login")
+					.loginProcessingUrl("/authenticate").permitAll()
+				)
+				.logout(LogoutConfigurer::permitAll
+				)
 				.build();
 	}
 }
