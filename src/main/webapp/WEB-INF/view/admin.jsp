@@ -1,5 +1,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!doctype html>
 <html lang="en">
@@ -24,7 +26,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Navbar</a>
+			<a class="navbar-brand" href="#">ADMIN</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarColor02"
 				aria-controls="navbarColor02" aria-expanded="false"
@@ -52,61 +54,36 @@
 							<a class="dropdown-item" href="#">Separated link</a>
 						</div></li>
 				</ul>
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">
+
+						<i class="fa fa-user"></i>
+						<!-- user.username -->
+						<security:authentication property="principal.username" />
+						<!-- user.roles -->
+						(
+						<security:authentication property="principal.authorities" />
+						)
+					</button>
+				</div>
 			</div>
 		</div>
 	</nav>
 
 	<div class="container">
-		<c:if test="${ param.logout != null }">
-			<div class="alert alert-info text-center mt-4">You have been
-				successfully logged out</div>
-		</c:if>
 		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-				<div class="card border-0 shadow rounded-3 my-5">
-					<div class="card-body p-4 p-sm-5">
-						<h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
+			<h1 class="text-danger">Hello ADMIN</h1>
 
-						<c:if test="${ param.error != null }">
-							<div class="alert alert-danger text-center">Bad credentials
-							</div>
-						</c:if>
-
-						<form:form
-							action="${pageContext.request.contextPath}/authenticate"
-							method="POST">
-							<div class="form-floating mb-3">
-								<input type="text" class="form-control" name="username"
-									placeholder="username"> <label for="username">User
-									name</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input type="password" class="form-control"
-									placeholder="Password" name="password"> <label
-									for="password">Password</label>
-							</div>
-
-							<div class="form-check mb-3">
-								<input class="form-check-input" type="checkbox" value=""
-									id="remember"> <label class="form-check-label"
-									for="remember"> Remember password </label>
-							</div>
-							<div class="d-grid">
-								<button
-									class="btn btn btn-dark btn-login text-uppercase fw-bold"
-									type="submit">Sign in</button>
-							</div>
-						</form:form>
-					</div>
-				</div>
-			</div>
+			<form:form action="${pageContext.request.contextPath}/logout"
+				method="POST">
+				<button type="submit" class="btn btn-dark" value="logout">Logout</button>
+			</form:form>
 		</div>
 	</div>
 
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/fontawesome.min.js"></script>
 	<script

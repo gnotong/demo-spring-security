@@ -1,5 +1,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!doctype html>
 <html lang="en">
@@ -52,11 +54,19 @@
 							<a class="dropdown-item" href="#">Separated link</a>
 						</div></li>
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-sm-2" type="text"
-						placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-				</form>
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">
+
+						<i class="fa fa-user"></i>
+						<!-- user.username -->
+						<security:authentication property="principal.username" />
+						<!-- user.roles -->
+						(
+						<security:authentication property="principal.authorities" />
+						)
+					</button>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -65,7 +75,11 @@
 		<div class="row">
 			<h1 class="text-danger">Hello mec</h1>
 			
-			<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+			<a href="${pageContext.request.contextPath}/admin">Administration</a>
+			<a href="${pageContext.request.contextPath}/manager">Manager</a>
+
+			<form:form action="${pageContext.request.contextPath}/logout"
+				method="POST">
 				<button type="submit" class="btn btn-dark" value="logout">Logout</button>
 			</form:form>
 		</div>

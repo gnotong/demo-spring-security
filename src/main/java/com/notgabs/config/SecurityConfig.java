@@ -34,6 +34,8 @@ public class SecurityConfig {
 		
 		return http.authorizeRequests(configurer -> configurer
 	                .antMatchers("/resources/**").permitAll()
+					.antMatchers("/admin").hasRole("ADMIN")
+					.antMatchers("/manager").hasRole("MANAGER")
 					.anyRequest().authenticated()
 				)
 				// OVERRIDES THE DEFAULT SPRING LOGIN PAGE
