@@ -74,10 +74,13 @@
 	<div class="container">
 		<div class="row">
 			<h1 class="text-danger">Hello mec</h1>
-			
-			<a href="${pageContext.request.contextPath}/admin">Administration</a>
-			<a href="${pageContext.request.contextPath}/manager">Manager</a>
 
+			<security:authorize access="hasRole('ADMIN')">
+				<a href="${pageContext.request.contextPath}/admin">Administration</a>
+			</security:authorize>
+			<security:authorize access="hasRole('MANAGER')">
+				<a href="${pageContext.request.contextPath}/manager">Manager</a>
+			</security:authorize>
 			<form:form action="${pageContext.request.contextPath}/logout"
 				method="POST">
 				<button type="submit" class="btn btn-dark" value="logout">Logout</button>
